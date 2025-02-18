@@ -1,70 +1,72 @@
-# Getting Started with Create React App
+## DevOps Final Exam for AWS, Jenkins. Docker, Kubernetes
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Date: 			15 february-20 February
+Submission deadline: 	20 february 11.59PM
 
-## Available Scripts
+Steps:
+Make github repository
+Make a repository for application code (base repo)
 
-In the project directory, you can run:
+Local Development:
+Choose an frontend application of your choice react/vue/angular or anything of your choice.
+Generate a demo application
+Change the frontend code as you desire, output page must have your name on it.
+Run this locally so that you can see the changes you made in the browser.
+Push the code to the github base repo
 
-### `npm start`
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+Docker Development:
+Write a docker file and dockerize the application
+Make a docker image and run it locally and expose its port. so that you can browse the application on your browser
+Try to optimize the dockerfile
+Make a docker compose to run the application and expose it on 9097 port
+Push the updates to the github repository, base repo
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+Kubernetes Development:
+Install minikube locally.
+Write deployment and clusterip service for the dockerized application
+Run the application in kubernetes environment
+Figure out how to install ingress in minikube.
+Write an ingressfile for the application
+Apply the ingress and browse the application on your browser(might need to research from online)
+push the kubernetes manifest files to the base repository
 
-### `npm test`
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+AWS Development:
+ create a ec2 instance
+	- make a aws userdata to 
+		- install jenkins 
+		- install docker
+		- give jenkins user permission to docker group
+		- restart jenkins and docker 
 
-### `npm run build`
+Make a file named userdata.sh and paste the aws userdata content in this file.
+Push this code to the base repository 
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-### `npm run eject`
+AWS Development 2:
+In the same jenkins server, in the /var/www folder make a new folder named “app”
+Inside app directory use the docker compose file and run the application
+Browse on ec2ip:9097 port
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+Jenkins Development:
+Make a pipeline	 named base pipeline
+Should be triggered when merge request is accepted from dev -> main branch.
+Upon merge acceptance pipeline is triggered
+Git code is pulled
+Docker image is built
+Image tag should be:
+pipeline_build_number-day-month-hour-minute
+Docker push to dockerhub (using username and password variable  from the jenkins credentials)
+Docker logout
+Clean the workspace
+Use linux commands to update the image tag at dockercompose.yaml file in the /var/www/app directory
+After updating the docker compose file, rerun the docker compose so that the container picks the new image and start with the new image.
+Send a google chat notification (if pipeline successful)
+Notification should be “your application has been updated,
+Imagename:imagetag”
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+			
+Push the code to the repository
